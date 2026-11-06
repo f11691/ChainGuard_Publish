@@ -10,5 +10,5 @@ scipy==1.16.0          # exact McNemar tests, Wilson intervals
 matplotlib==3.10.3     # make_roc_figure.py only
 # Comparator and target-model experiments only:
 transformers==4.53.0
-torch==2.7.1
+torch==2.13.0
 datasets==3.6.0
