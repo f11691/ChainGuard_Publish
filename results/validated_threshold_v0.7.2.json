@@ -1,0 +1,321 @@
+{
+ "dataset": "xTRam1/safe-guard-prompt-injection",
+ "validation_split": "train",
+ "test_split": "test",
+ "grid": [
+  0.78,
+  0.85,
+  0.9,
+  0.95,
+  1.0,
+  1.01
+ ],
+ "model": "protectai/deberta-v3-base-prompt-injection-v2",
+ "selection": "highest validation detection with validation false-block rate <= ceiling; frozen, then applied once to test",
+ "shipped_check": {
+  "detected": 1302,
+  "n_attack": 3146,
+  "detection": 0.41385886840432295,
+  "detection_ci": [
+   39.676350274282065,
+   43.11643447106141
+  ],
+  "false_blocked": 137,
+  "n_benign": 7150,
+  "false_block": 0.01916083916083916,
+  "false_block_ci": [
+   1.6231802332262548,
+   2.2606276540711114
+  ]
+ },
+ "chainguard_grid": {
+  "0.78": {
+   "validation": {
+    "detected": 1025,
+    "n_attack": 2496,
+    "detection": 0.41065705128205127,
+    "detection_ci": [
+     39.150903613566804,
+     43.007964964839765
+    ],
+    "false_blocked": 96,
+    "n_benign": 5740,
+    "false_block": 0.016724738675958188,
+    "false_block_ci": [
+     1.3715859906383336,
+     2.038004267492592
+    ]
+   },
+   "test": {
+    "detected": 277,
+    "n_attack": 650,
+    "detection": 0.42615384615384616,
+    "detection_ci": [
+     38.86805475740978,
+     46.44948687219468
+    ],
+    "false_blocked": 41,
+    "n_benign": 1410,
+    "false_block": 0.029078014184397163,
+    "false_block_ci": [
+     2.150620793702111,
+     3.92088448624556
+    ]
+   }
+  },
+  "0.85": {
+   "validation": {
+    "detected": 1025,
+    "n_attack": 2496,
+    "detection": 0.41065705128205127,
+    "detection_ci": [
+     39.150903613566804,
+     43.007964964839765
+    ],
+    "false_blocked": 95,
+    "n_benign": 5740,
+    "false_block": 0.016550522648083623,
+    "false_block_ci": [
+     1.3558694105757103,
+     2.0189009449806403
+    ]
+   },
+   "test": {
+    "detected": 277,
+    "n_attack": 650,
+    "detection": 0.42615384615384616,
+    "detection_ci": [
+     38.86805475740978,
+     46.44948687219468
+    ],
+    "false_blocked": 40,
+    "n_benign": 1410,
+    "false_block": 0.028368794326241134,
+    "false_block_ci": [
+     2.0901833902602465,
+     3.8398633133018034
+    ]
+   }
+  },
+  "0.9": {
+   "validation": {
+    "detected": 1025,
+    "n_attack": 2496,
+    "detection": 0.41065705128205127,
+    "detection_ci": [
+     39.150903613566804,
+     43.007964964839765
+    ],
+    "false_blocked": 95,
+    "n_benign": 5740,
+    "false_block": 0.016550522648083623,
+    "false_block_ci": [
+     1.3558694105757103,
+     2.0189009449806403
+    ]
+   },
+   "test": {
+    "detected": 277,
+    "n_attack": 650,
+    "detection": 0.42615384615384616,
+    "detection_ci": [
+     38.86805475740978,
+     46.44948687219468
+    ],
+    "false_blocked": 40,
+    "n_benign": 1410,
+    "false_block": 0.028368794326241134,
+    "false_block_ci": [
+     2.0901833902602465,
+     3.8398633133018034
+    ]
+   }
+  },
+  "0.95": {
+   "validation": {
+    "detected": 1025,
+    "n_attack": 2496,
+    "detection": 0.41065705128205127,
+    "detection_ci": [
+     39.150903613566804,
+     43.007964964839765
+    ],
+    "false_blocked": 95,
+    "n_benign": 5740,
+    "false_block": 0.016550522648083623,
+    "false_block_ci": [
+     1.3558694105757103,
+     2.0189009449806403
+    ]
+   },
+   "test": {
+    "detected": 277,
+    "n_attack": 650,
+    "detection": 0.42615384615384616,
+    "detection_ci": [
+     38.86805475740978,
+     46.44948687219468
+    ],
+    "false_blocked": 40,
+    "n_benign": 1410,
+    "false_block": 0.028368794326241134,
+    "false_block_ci": [
+     2.0901833902602465,
+     3.8398633133018034
+    ]
+   }
+  },
+  "1.0": {
+   "validation": {
+    "detected": 1025,
+    "n_attack": 2496,
+    "detection": 0.41065705128205127,
+    "detection_ci": [
+     39.150903613566804,
+     43.007964964839765
+    ],
+    "false_blocked": 95,
+    "n_benign": 5740,
+    "false_block": 0.016550522648083623,
+    "false_block_ci": [
+     1.3558694105757103,
+     2.0189009449806403
+    ]
+   },
+   "test": {
+    "detected": 277,
+    "n_attack": 650,
+    "detection": 0.42615384615384616,
+    "detection_ci": [
+     38.86805475740978,
+     46.44948687219468
+    ],
+    "false_blocked": 40,
+    "n_benign": 1410,
+    "false_block": 0.028368794326241134,
+    "false_block_ci": [
+     2.0901833902602465,
+     3.8398633133018034
+    ]
+   }
+  },
+  "1.01": {
+   "validation": {
+    "detected": 1025,
+    "n_attack": 2496,
+    "detection": 0.41065705128205127,
+    "detection_ci": [
+     39.150903613566804,
+     43.007964964839765
+    ],
+    "false_blocked": 95,
+    "n_benign": 5740,
+    "false_block": 0.016550522648083623,
+    "false_block_ci": [
+     1.3558694105757103,
+     2.0189009449806403
+    ]
+   },
+   "test": {
+    "detected": 277,
+    "n_attack": 650,
+    "detection": 0.42615384615384616,
+    "detection_ci": [
+     38.86805475740978,
+     46.44948687219468
+    ],
+    "false_blocked": 40,
+    "n_benign": 1410,
+    "false_block": 0.028368794326241134,
+    "false_block_ci": [
+     2.0901833902602465,
+     3.8398633133018034
+    ]
+   }
+  }
+ },
+ "results": {
+  "fpr<=0.005": {
+   "chainguard": {
+    "threshold": null,
+    "note": "no grid threshold meets the ceiling on validation"
+   },
+   "deberta": {
+    "threshold": 0.006263138260692358,
+    "validation": {
+     "detected": 2236,
+     "n_attack": 2496,
+     "detection": 0.8958333333333334,
+     "detection_ci": [
+      88.32347814016285,
+      90.72153461559637
+     ],
+     "false_blocked": 28,
+     "n_benign": 5740,
+     "false_block": 0.004878048780487805,
+     "false_block_ci": [
+      0.3377202807336849,
+      0.704116602326189
+     ]
+    },
+    "test": {
+     "detected": 590,
+     "n_attack": 650,
+     "detection": 0.9076923076923077,
+     "detection_ci": [
+      88.29810278763645,
+      92.76130279892223
+     ],
+     "false_blocked": 7,
+     "n_benign": 1410,
+     "false_block": 0.004964539007092199,
+     "false_block_ci": [
+      0.24068806402431456,
+      1.0212256188122428
+     ]
+    }
+   }
+  },
+  "fpr<=0.010": {
+   "chainguard": {
+    "threshold": null,
+    "note": "no grid threshold meets the ceiling on validation"
+   },
+   "deberta": {
+    "threshold": 0.0010111790616065264,
+    "validation": {
+     "detected": 2314,
+     "n_attack": 2496,
+     "detection": 0.9270833333333334,
+     "detection_ci": [
+      91.62138116129184,
+      93.66402733834312
+     ],
+     "false_blocked": 57,
+     "n_benign": 5740,
+     "false_block": 0.009930313588850175,
+     "false_block_ci": [
+      0.7672953499765732,
+      1.2843187077459552
+     ]
+    },
+    "test": {
+     "detected": 605,
+     "n_attack": 650,
+     "detection": 0.9307692307692308,
+     "detection_ci": [
+      90.86171671340598,
+      94.7859571139013
+     ],
+     "false_blocked": 21,
+     "n_benign": 1410,
+     "false_block": 0.014893617021276596,
+     "false_block_ci": [
+      0.9761779722553824,
+      2.2661557799798695
+     ]
+    }
+   }
+  }
+ }
+}

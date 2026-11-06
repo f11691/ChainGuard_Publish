@@ -14,9 +14,9 @@ data/
   attacks/ benign/ regression/       fixtures used by the tests
 SOURCE_FREEZE_V0.7.2.json   SHA-256 of all 41 frozen source, test and metadata files
 SOURCE_INTEGRITY_V0.7.2.json  recomputed check of that manifest
-scripts/                    the 11 experiment scripts behind the paper's results
-results/                    the 15 stored result files (all *_v0.7.2.json)
-audit_saved_records.py      recomputes 54 reported values from results/
+scripts/                    the 12 experiment scripts behind the paper's results
+results/                    the 16 stored result files (all *_v0.7.2.json)
+audit_saved_records.py      recomputes 63 reported values from results/
 result_map.csv              result -> script -> input -> stored output -> re-run status
 MANIFEST.sha256             SHA-256 of every file in this repository
 requirements-repro.txt      verified versions
@@ -31,7 +31,7 @@ pip install -r requirements-repro.txt
 pip install -e .
 pytest tests                      # 42 passed
 sha256sum -c MANIFEST.sha256      # every file unchanged
-python3 audit_saved_records.py    # 54/54 checks against the stored records
+python3 audit_saved_records.py    # 63/63 checks against the stored records
 ```
 
 `audit_saved_records.py` uses the standard library only and runs no detector or
@@ -51,6 +51,7 @@ python3 scripts/external_benchmark.py --repo . --out external.json      # downlo
 python3 scripts/injecagent_eval.py --repo . --out injecagent.json       # downloads InjecAgent
 python3 scripts/large_public_benchmarks.py                              # downloads Gandalf, Safe-Guard; writes big_public.json
 python3 scripts/learned_baseline.py --repo . --chainguard-results results/ablation_v0.7.2.json --out learned.json
+python3 scripts/validated_threshold.py --repo . --out validated.json   # thresholds selected on Safe-Guard train, tested on test
 ```
 
 `result_map.csv` records the status of every reported result:
@@ -61,8 +62,10 @@ python3 scripts/learned_baseline.py --repo . --chainguard-results results/ablati
 | `rerunnable` | code and inputs are available, but the run was not repeated |
 
 `verified`: primary holdout, classifier cross-validation and corpus hash,
-ablation, threshold sweep, the DeBERTa baseline on the holdout, and the deepset,
-NotInject, Gandalf, Safe-Guard and InjecAgent benchmarks.
+ablation, threshold sweep, the DeBERTa baseline on the holdout, the deepset,
+NotInject, Gandalf, Safe-Guard and InjecAgent benchmarks, and the
+validation-selected threshold test (new in this revision; it reproduces the stored
+Safe-Guard totals at the shipped threshold as a self-check).
 
 `rerunnable` only: the three local target-model experiments (end-to-end replay,
 Gandalf replication, adaptive evaluation), which need CPU-hours of generation,

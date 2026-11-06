@@ -6,6 +6,7 @@ Threshold sensitivity sweep (Sec. 6.6),threshold_sweep.py --steps 11,data/post_f
 deepset and NotInject benchmarks (Sec. 6.10),external_benchmark.py,"deepset/prompt-injections, leolee99/NotInject",external_benchmark_v0.7.2.json,verified,per-item
 Gandalf and Safe-Guard benchmarks (Sec. 6.10),large_public_benchmarks.py,"Lakera/gandalf, xTRam1/safe-guard",large_public_benchmarks_v0.7.2.json,verified,summary
 InjecAgent two-turn evaluation (Sec. 6.10),injecagent_eval.py,InjecAgent test cases,injecagent_v0.7.2.json,verified,summary
+Validation-selected thresholds on Safe-Guard (Sec. 6.6),validated_threshold.py,xTRam1/safe-guard train (select) / test (evaluate),validated_threshold_v0.7.2.json,verified,summary
 Matched learned-guard baseline (Sec. 6.3),learned_baseline.py,data/post_freeze_source_challenge_v2 + DeBERTa,learned_baseline_v0.7.2.json,verified,per-item
 ROC comparison figure (Fig. 5),make_roc_figure.py,learned_baseline_v0.7.2.json,Fig/fig_roc_comparison.pdf,rerunnable,per-item
 DeBERTa comparator on independent data (Sec. 6.10),"external_benchmark.py, large_public_benchmarks.py, injecagent_eval.py",same independent datasets + DeBERTa,*_deberta_v0.7.2.json (3 files),rerunnable,summary

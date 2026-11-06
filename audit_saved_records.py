@@ -94,6 +94,9 @@ RESULT_MAP = [
     ("InjecAgent two-turn evaluation (Sec. 6.10)",
      "injecagent_eval.py", "InjecAgent test cases",
      "injecagent_v0.7.2.json", "verified", "summary"),
+    ("Validation-selected thresholds on Safe-Guard (Sec. 6.6)",
+     "validated_threshold.py", "xTRam1/safe-guard train (select) / test (evaluate)",
+     "validated_threshold_v0.7.2.json", "verified", "summary"),
     ("Matched learned-guard baseline (Sec. 6.3)",
      "learned_baseline.py", "data/post_freeze_source_challenge_v2 + DeBERTa",
      "learned_baseline_v0.7.2.json", "verified", "per-item"),
@@ -265,6 +268,23 @@ def audit_external(a: Audit, results: pathlib.Path) -> None:
     a.check("independent evaluation items", total, 13351)
 
 
+def audit_validated_threshold(a: Audit, results: pathlib.Path) -> None:
+    vt = load(results, "validated_threshold_v0.7.2.json")
+    c = vt["shipped_check"]
+    a.check("validated: shipped config reproduces Safe-Guard detections", c["detected"], 1302)
+    a.check("validated: shipped config reproduces Safe-Guard false blocks", c["false_blocked"], 137)
+    g = vt["chainguard_grid"]
+    a.check("validated: ChainGuard lowest validation false blocks",
+            min(v["validation"]["false_blocked"] for v in g.values()), 95)
+    for key in ("fpr<=0.005", "fpr<=0.010"):
+        a.check(f"validated: ChainGuard attains {key}",
+                vt["results"][key]["chainguard"]["threshold"], None)
+    for key, det, fb in (("fpr<=0.005", 590, 7), ("fpr<=0.010", 605, 21)):
+        t = vt["results"][key]["deberta"]["test"]
+        a.check(f"validated: DeBERTa {key} test detections", t["detected"], det)
+        a.check(f"validated: DeBERTa {key} test false blocks", t["false_blocked"], fb)
+
+
 def audit_adaptive(a: Audit, results: pathlib.Path) -> None:
     no_fa = load(results, "adaptive_nofa_v0.7.2.json")
     fa = load(results, "adaptive_fa_tiny_v0.7.2.json")
@@ -320,6 +340,7 @@ def main() -> int:
     audit_learned(a, args.results)
     audit_external(a, args.results)
     audit_adaptive(a, args.results)
+    audit_validated_threshold(a, args.results)
     rc = a.report()
 
     if args.export_turns:
