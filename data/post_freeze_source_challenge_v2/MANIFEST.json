@@ -1,0 +1,26 @@
+{
+  "name": "post_freeze_source_challenge_v2",
+  "created_after_detector_freeze": "eab119d020528ecd7589de1b69b14caeef156f7e795754624691970eb542d76a",
+  "attack_sessions": 80,
+  "benign_sessions": 100,
+  "attack_category_counts": {
+    "direct_disclosure": 10,
+    "instruction_override": 10,
+    "data_exfiltration": 10,
+    "encoding_obfuscation": 10,
+    "multi_turn_composition": 12,
+    "indirect_source_injection": 12,
+    "multilingual_attack": 8,
+    "protected_transformation": 8
+  },
+  "benign_category_counts": {
+    "security_discussion": 15,
+    "quoted_attack_analysis": 15,
+    "benign_transformation": 15,
+    "benign_untrusted_content": 20,
+    "ordinary_user_request": 20,
+    "multilingual_benign": 10,
+    "trigger_word_hard_negative": 5
+  },
+  "note": "Researcher-authored after v0.7.2 source freeze. Detector source was not changed after this dataset was created or evaluated. This is a post-freeze holdout, not an external benchmark."
+}

@@ -1,5 +1,5 @@
 import json, math, random, sys
-sys.path.insert(0,"cg/chainguard_v0.7.2_code/src"); sys.path.insert(0, str(__import__("pathlib").Path(__file__).resolve().parent))
+sys.path.insert(0, str(__import__("pathlib").Path(__file__).resolve().parents[1] / "src")); sys.path.insert(0, str(__import__("pathlib").Path(__file__).resolve().parent))
 from pinj.chainguard import ChainGuardV7
 from pinj.chainguard.accumulator import Action
 from pinj.chainguard.output_guard import OutputGuard

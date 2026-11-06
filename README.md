@@ -1,71 +1,90 @@
-# ChainGuard reproducibility package (AISC-12003)
+# ChainGuard v0.7.2: source code, data and reproducibility package
 
-Companion materials for *ChainGuard: A Layered and Provenance-Aware Runtime
-Architecture for Local Prompt Injection Screening* (AI and Security Convergence,
-manuscript AISC-12003). This repository is the reproducibility package cited in the
-article's Data Availability Statement; release `aisc-12003-r3` is the version that
+This repository accompanies the article *ChainGuard: A Layered and Provenance-Aware
+Runtime Architecture for Local Prompt Injection Screening* (AI and Security
+Convergence, manuscript AISC-12003). Release `aisc-12003-r3` is the version that
 accompanies the third revision.
 
 ```
-LICENSE                    MIT
-audit_saved_records.py     recomputes every headline number from saved records
-result_map.csv             result -> script / input / stored output / granularity
-MANIFEST.sha256            SHA-256 of every file in this package
-requirements-repro.txt     pinned versions
-scripts/                   11 experiment scripts
-results/                   15 stored result files, all labelled v0.7.2
+src/pinj/chainguard/        the ChainGuard detector (frozen v0.7.2 source)
+  resources/                classifier training corpus (941 turns)
+tests/                      42 unit and regression tests
+data/
+  post_freeze_source_challenge_v2/   primary holdout: 80 attack, 100 benign sessions
+  attacks/ benign/ regression/       fixtures used by the tests
+SOURCE_FREEZE_V0.7.2.json   SHA-256 of all 41 frozen source, test and metadata files
+SOURCE_INTEGRITY_V0.7.2.json  recomputed check of that manifest
+scripts/                    the 11 experiment scripts behind the paper's results
+results/                    the 15 stored result files (all *_v0.7.2.json)
+audit_saved_records.py      recomputes 54 reported values from results/
+result_map.csv              result -> script -> input -> stored output -> re-run status
+MANIFEST.sha256             SHA-256 of every file in this repository
+requirements-repro.txt      verified versions
 ```
 
-## Audit without running the detector
+## Quick start
+
+Python 3.13; verified versions are in `requirements-repro.txt`.
 
 ```
-python3 audit_saved_records.py
+pip install -r requirements-repro.txt
+pip install -e .
+pytest tests                      # 42 passed
+sha256sum -c MANIFEST.sha256      # every file unchanged
+python3 audit_saved_records.py    # 54/54 checks against the stored records
 ```
 
-Standard library only, no network, no model download. It recomputes 54 reported
-values from `results/` and compares each with the number printed in the
-manuscript; exit status is 0 only when all 54 agree. It can also export every
-recorded target-model turn with its ingress and egress decision:
+`audit_saved_records.py` uses the standard library only and runs no detector or
+model. `--export-turns turns.csv` writes all 612 recorded target-model turns with
+their ingress and egress decisions.
+
+## Re-running the experiments
+
+Every script takes `--repo .` (the repository root):
 
 ```
-python3 audit_saved_records.py --export-turns turns.csv   # 612 rows
+python3 scripts/end_to_end.py --repo . --models --out holdout.json      # holdout decisions, no model
+python3 scripts/ablation_study.py --repo . --out ablation.json
+python3 scripts/threshold_sweep.py --repo . --steps 11 --out sweep.json
+python3 scripts/classifier_report.py --repo . --json-out classifier.json
+python3 scripts/external_benchmark.py --repo . --out external.json      # downloads deepset, NotInject
+python3 scripts/injecagent_eval.py --repo . --out injecagent.json       # downloads InjecAgent
+python3 scripts/large_public_benchmarks.py                              # downloads Gandalf, Safe-Guard; writes big_public.json
+python3 scripts/learned_baseline.py --repo . --chainguard-results results/ablation_v0.7.2.json --out learned.json
 ```
 
-## What this package does and does not establish
+`result_map.csv` records the status of every reported result:
 
-`result_map.csv` labels each reported result with its evidential granularity:
-
-| granularity  | meaning |
+| rerun        | meaning |
 |--------------|---------|
-| `rerunnable` | the script reproduces the number from files in this package |
-| `auditable`  | per-item records are stored, so the number is recomputed here, but the original measurement cannot be repeated from this package alone |
-| `summary`    | only an aggregate summary was stored; no per-item audit is possible |
+| `verified`   | re-run from this repository on 6 November 2026; output identical to the file in `results/` |
+| `rerunnable` | code and inputs are available, but the run was not repeated |
 
-Nothing here is `rerunnable` end to end except the ROC figure. The scripts
-import the detector package `pinj.chainguard` and read external data paths;
-**the archive alone cannot rerun the experiments.**
+`verified`: primary holdout, classifier cross-validation and corpus hash,
+ablation, threshold sweep, the DeBERTa baseline on the holdout, and the deepset,
+NotInject, Gandalf, Safe-Guard and InjecAgent benchmarks.
 
-Not included, and therefore not independently verifiable from this package:
+`rerunnable` only: the three local target-model experiments (end-to-end replay,
+Gandalf replication, adaptive evaluation), which need CPU-hours of generation,
+the DeBERTa runs on the independent datasets, and the ROC figure. Their per-item
+records, where stored, are recomputed by `audit_saved_records.py`.
 
-- the core detector source (`pinj.chainguard`);
-- the researcher-authored holdout inputs (80 attack, 100 benign sessions);
-- the classifier training corpus — `classifier_report_v0.7.2.json` records a
-  corpus hash, but with the corpus absent that hash cannot be revalidated;
-- full independent-benchmark caches, model commit revisions, an environment
-  lockfile, the software test suite, and any dated pre-freeze implementation
-  history.
+The classifier cross-validation figures require scikit-learn 1.8 or later: earlier
+versions assign different folds. Detector decisions are the same on all tested
+versions (1.5.2 to 1.9.1).
 
-`requirements-repro.txt` lists the versions the reported runs used; it is a
-record of the environment, not a resolved lockfile.
+## What is not here
 
-## Datasets
+- Model commit revisions for the three target models were not recorded in the
+  original runs. The DeBERTa revision that reproduces the stored scores is
+  given in `requirements-repro.txt`.
+- The independent benchmark data is not redistributed; the scripts download it
+  from its public sources.
+- There is no dated pre-freeze development history. `SOURCE_FREEZE_V0.7.2.json`
+  fixes the source by hash, and the holdout manifest names that hash as the
+  freeze it was created after, but neither file can prove when it was written.
 
-Independent data is not redistributed here. Sources:
-`Lakera/gandalf_ignore_instructions`, `xTRam1/safe-guard-prompt-injection`,
-`deepset/prompt-injections` and `leolee99/NotInject` (Hugging Face; NotInject is
-distributed with PIGuard, <https://github.com/leolee99/PIGuard/tree/main/datasets>),
-and InjecAgent test cases from the InjecAgent repository.
+## Licences
 
-## Version
-
-Detector version 0.7.2. Every result file carries the `v0.7.2` suffix.
+Code: MIT (`LICENSE`). The training corpus includes 303 rows from
+`zachz/prompt-injection-benchmark` (MIT); see `THIRD_PARTY_DATA.md`.

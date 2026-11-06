@@ -1,14 +1,19 @@
-# Audit-only dependencies (audit_saved_records.py)
-#   none: the audit script uses the Python 3.10+ standard library only.
-#
-# Re-running the experiment scripts in scripts/ additionally requires the
-# detector package and the pinned versions below.
-pinj==0.7.2            # the ChainGuard detector package (src/pinj/chainguard)
-scikit-learn==1.7.0    # local intent classifier
-numpy==2.3.1
-scipy==1.16.0          # exact McNemar tests, Wilson intervals
-matplotlib==3.10.3     # make_roc_figure.py only
-# Comparator and target-model experiments only:
-transformers==4.53.0
-torch==2.7.1
-datasets==3.6.0
+# Versions verified on 6 November 2026 by re-running the experiments from this
+# repository (Python 3.13.17). The stored results in results/ are reproduced
+# exactly with these versions.
+scikit-learn==1.9.1    # also verified: 1.8.0. Versions <= 1.7.2 change the
+                       # cross-validation folds and do NOT reproduce the stored
+                       # classifier_report (detector decisions are unaffected).
+numpy==2.5.4
+scipy==1.18.1
+joblib==1.6.0
+threadpoolctl==3.8.0
+pytest                 # tests/: 42 tests
+
+# DeBERTa comparator (learned_baseline.py; verified identical):
+torch==2.15.0          # CPU build
+transformers==5.22.1
+# model protectai/deberta-v3-base-prompt-injection-v2,
+#   revision 90c9989b1a342275dd0d1a95aad283c04e075671
+# Target-model experiments (end_to_end.py, gandalf_end_to_end.py,
+# adaptive_redteam.py) were not re-run; their model revisions were not recorded.

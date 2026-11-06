@@ -1,0 +1,5 @@
+scikit-learn>=1.4
+# Optional model-backed extras:
+transformers>=4.44
+torch>=2.2
+sentence-transformers>=3.0

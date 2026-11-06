@@ -229,6 +229,10 @@ def main() -> int:
 
     results = {"canary": CANARY, "n_attacks": len(attacks), "n_benign": len(benign),
                "chainguard_blocks": blocks, "models": {}}
+    # write once before any model runs, so `--models` with no model ids
+    # still records the detector decisions on the holdout
+    args.out.write_text(json.dumps(results, indent=2, ensure_ascii=False),
+                        encoding="utf-8")
     for mid in args.models:
         print(f"== {mid}", file=sys.stderr, flush=True)
         results["models"][mid] = run_model(mid, attacks, benign, blocks, mods, args)

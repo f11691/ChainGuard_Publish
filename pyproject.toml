@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pinj"
+version = "0.7.2"
+description = "Layered semantic, stateful, provenance-aware ChainGuard prompt-attack detector"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Elena D'Agate"}]
+dependencies = ["scikit-learn>=1.4"]
+
+[project.optional-dependencies]
+encoder = ["sentence-transformers>=3.0", "scikit-learn>=1.3"]
+models = ["transformers>=4.44", "torch>=2.2", "sentence-transformers>=3.0"]
+dev = ["pytest>=8"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"pinj.chainguard.resources" = ["*.json"]

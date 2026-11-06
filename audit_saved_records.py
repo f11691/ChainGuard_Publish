@@ -3,8 +3,8 @@
 record files in results/ and check it against the value printed in the paper.
 
 This script executes no detector, no target model, and no network request. It
-audits stored outcomes only. Results that can be *rerun* rather than merely
-audited are listed in RESULT_MAP with granularity "rerunnable".
+audits stored outcomes only. To re-run the experiments themselves, see README.md;
+RESULT_MAP records which results were re-run and found identical.
 
 Usage:  python3 audit_saved_records.py [--results DIR] [--export-turns FILE]
 Exit status is 0 when every check passes, 1 otherwise.
@@ -65,62 +65,61 @@ def load(results: pathlib.Path, name: str):
 # --------------------------------------------------------------------------
 # result-to-script map (Section 7 of the manuscript / Table~\ref{tab:resultmap})
 # --------------------------------------------------------------------------
-# granularity:
-#   rerunnable  - the script reproduces the number given the detector package
-#                 pinj.chainguard, its corpus, and the external dataset caches
-#   auditable   - the number is recomputed here from stored per-item records
-#   summary     - only an aggregate summary was stored; no per-item audit
+# rerun:   verified   - re-run from this repository on 6 Nov 2026; the output
+#                         was identical to the stored file in results/
+#           rerunnable - code and inputs are here or public, but the run
+#                         was not repeated (local target-model generation)
+# records: per-item     - stored per-item records; recomputed by this script
+#          summary      - aggregate counts only
 RESULT_MAP = [
-    # manuscript result, script, input data, stored output, granularity
+    # result, script, input data, stored output, rerun, records
     ("Primary holdout detection and false blocks (Sec. 6.1)",
-     "end_to_end.py", "authored holdout (not supplied)",
-     "end_to_end_v0.7.2.json", "auditable"),
-    ("Classifier cross-validation and overlap (Sec. 4.7.1)",
-     "classifier_report.py", "training corpus (not supplied)",
-     "classifier_report_v0.7.2.json", "summary"),
-    ("Matched learned-guard baseline (Sec. 6.3)",
-     "learned_baseline.py", "authored holdout (not supplied)",
-     "learned_baseline_v0.7.2.json", "auditable"),
-    ("ROC comparison figure (Fig. 5)",
-     "make_roc_figure.py", "learned_baseline_v0.7.2.json",
-     "Fig/fig_roc_comparison.pdf", "rerunnable"),
+     "end_to_end.py --models", "data/post_freeze_source_challenge_v2",
+     "end_to_end_v0.7.2.json", "verified", "per-item"),
+    ("Classifier cross-validation, calibration, overlap (Sec. 4.7.1)",
+     "classifier_report.py", "src/pinj/chainguard/resources (941 turns)",
+     "classifier_report_v0.7.2.json", "verified", "summary"),
     ("Component ablation, eleven arms (Sec. 6.5)",
-     "ablation_study.py", "authored holdout (not supplied)",
-     "ablation_v0.7.2.json", "auditable"),
+     "ablation_study.py", "data/post_freeze_source_challenge_v2",
+     "ablation_v0.7.2.json", "verified", "per-item"),
     ("Threshold sensitivity sweep (Sec. 6.6)",
-     "threshold_sweep.py", "authored holdout (not supplied)",
-     "threshold_sweep_v0.7.2.json", "auditable"),
-    ("End-to-end target-model replay (Sec. 6.9)",
-     "end_to_end.py", "three local models, 612 recorded turns",
-     "end_to_end_v0.7.2.json", "auditable"),
-    ("Gandalf end-to-end replication (Sec. 6.9)",
-     "gandalf_end_to_end.py", "Lakera/gandalf_ignore_instructions",
-     "gandalf_end_to_end_v0.7.2.json", "summary"),
+     "threshold_sweep.py --steps 11", "data/post_freeze_source_challenge_v2",
+     "threshold_sweep_v0.7.2.json", "verified", "per-item"),
     ("deepset and NotInject benchmarks (Sec. 6.10)",
      "external_benchmark.py", "deepset/prompt-injections, leolee99/NotInject",
-     "external_benchmark_v0.7.2.json", "auditable"),
+     "external_benchmark_v0.7.2.json", "verified", "per-item"),
     ("Gandalf and Safe-Guard benchmarks (Sec. 6.10)",
      "large_public_benchmarks.py", "Lakera/gandalf, xTRam1/safe-guard",
-     "large_public_benchmarks_v0.7.2.json", "summary"),
+     "large_public_benchmarks_v0.7.2.json", "verified", "summary"),
     ("InjecAgent two-turn evaluation (Sec. 6.10)",
      "injecagent_eval.py", "InjecAgent test cases",
-     "injecagent_v0.7.2.json", "summary"),
+     "injecagent_v0.7.2.json", "verified", "summary"),
+    ("Matched learned-guard baseline (Sec. 6.3)",
+     "learned_baseline.py", "data/post_freeze_source_challenge_v2 + DeBERTa",
+     "learned_baseline_v0.7.2.json", "verified", "per-item"),
+    ("ROC comparison figure (Fig. 5)",
+     "make_roc_figure.py", "learned_baseline_v0.7.2.json",
+     "Fig/fig_roc_comparison.pdf", "rerunnable", "per-item"),
     ("DeBERTa comparator on independent data (Sec. 6.10)",
      "external_benchmark.py, large_public_benchmarks.py, injecagent_eval.py",
-     "same independent datasets",
-     "external_benchmark_deberta_v0.7.2.json, large_public_deberta_v0.7.2.json, "
-     "injecagent_deberta_v0.7.2.json", "summary"),
+     "same independent datasets + DeBERTa",
+     "*_deberta_v0.7.2.json (3 files)", "rerunnable", "summary"),
+    ("End-to-end target-model replay (Sec. 6.9)",
+     "end_to_end.py", "holdout + three local target models",
+     "end_to_end_v0.7.2.json", "rerunnable", "per-item"),
+    ("Gandalf end-to-end replication (Sec. 6.9)",
+     "gandalf_end_to_end.py", "Lakera/gandalf + Qwen2.5-1.5B",
+     "gandalf_end_to_end_v0.7.2.json", "rerunnable", "summary"),
     ("Query-bounded adaptive evaluation (Sec. 6.11)",
-     "adaptive_redteam.py", "61 initially blocked attack sessions",
-     "adaptive_nofa_v0.7.2.json, adaptive_nofa_tiny_v0.7.2.json, "
-     "adaptive_fa_tiny_v0.7.2.json", "auditable"),
+     "adaptive_redteam.py", "61 blocked holdout sessions + target models",
+     "adaptive_*_v0.7.2.json (3 files)", "rerunnable", "per-item"),
 ]
 
 
 def write_result_map(path: pathlib.Path) -> None:
     with path.open("w", newline="", encoding="utf-8") as fh:
         w = csv.writer(fh)
-        w.writerow(["result", "script", "input_data", "stored_output", "granularity"])
+        w.writerow(["result", "script", "input_data", "stored_output", "rerun", "records"])
         w.writerows(RESULT_MAP)
 
 
@@ -330,9 +329,9 @@ def main() -> int:
         write_result_map(args.write_result_map)
         print(f"Wrote result-to-script map to {args.write_result_map}")
 
-    print("\nGranularity of each reported result:")
-    for result, script, _data, _out, gran in RESULT_MAP:
-        print(f"  [{gran:<10}] {result}  <-  {script}")
+    print("\nRe-run status of each reported result:")
+    for result, script, _data, _out, rerun, records in RESULT_MAP:
+        print(f"  [{rerun:<10}|{records:<8}] {result}  <-  {script}")
     return rc
 
 
