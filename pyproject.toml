@@ -9,7 +9,7 @@ description = "Layered semantic, stateful, provenance-aware ChainGuard prompt-at
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
-authors = [{name = "Elena D'Agate"}]
+authors = [{name = "Christina Stodt"}]
 dependencies = ["scikit-learn>=1.4"]
 
 [project.optional-dependencies]

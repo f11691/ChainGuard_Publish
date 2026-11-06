@@ -12,7 +12,7 @@ tests/                      42 unit and regression tests
 data/
   post_freeze_source_challenge_v2/   primary holdout: 80 attack, 100 benign sessions
   attacks/ benign/ regression/       fixtures used by the tests
-SOURCE_FREEZE_V0.7.2.json   SHA-256 of all 41 frozen source, test and metadata files
+SOURCE_FREEZE_V0.7.2.json   SHA-256 of the 41 frozen source, test and metadata files
 SOURCE_INTEGRITY_V0.7.2.json  recomputed check of that manifest
 scripts/                    the 12 experiment scripts behind the paper's results
 results/                    the 16 stored result files (all *_v0.7.2.json)
@@ -20,6 +20,20 @@ audit_saved_records.py      recomputes 63 reported values from results/
 result_map.csv              result -> script -> input -> stored output -> re-run status
 MANIFEST.sha256             SHA-256 of every file in this repository
 requirements-repro.txt      verified versions
+```
+
+## Post-freeze correction
+
+One frozen file has changed since the freeze: the author field in `pyproject.toml`
+was corrected from a wrong name to Christina Stodt, the sole author, and the
+same correction was made to the copyright line in `LICENSE` (not a frozen file).
+No code, test, data or dependency changed. The other 40 frozen files match
+`SOURCE_FREEZE_V0.7.2.json` byte for byte, and the original `pyproject.toml`
+from commit `5e07999` matches its frozen hash:
+
+```
+git show 5e07999:pyproject.toml | sha256sum   # ec8e0be0...a83f434, as in the freeze manifest
+git diff 5e07999 -- pyproject.toml            # the one-line author change
 ```
 
 ## Quick start
