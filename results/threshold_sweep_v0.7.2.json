@@ -1,0 +1,177 @@
+{
+  "shipped_threshold": 0.78,
+  "curves": {
+    "full": {
+      "points": [
+        {
+          "threshold": 0.0,
+          "tpr": 0.975,
+          "fpr": 0.45,
+          "attacks_blocked": 78,
+          "benign_blocked": 45
+        },
+        {
+          "threshold": 0.1,
+          "tpr": 0.975,
+          "fpr": 0.4,
+          "attacks_blocked": 78,
+          "benign_blocked": 40
+        },
+        {
+          "threshold": 0.2,
+          "tpr": 0.9375,
+          "fpr": 0.2,
+          "attacks_blocked": 75,
+          "benign_blocked": 20
+        },
+        {
+          "threshold": 0.3,
+          "tpr": 0.8125,
+          "fpr": 0.09,
+          "attacks_blocked": 65,
+          "benign_blocked": 9
+        },
+        {
+          "threshold": 0.4,
+          "tpr": 0.7625,
+          "fpr": 0.07,
+          "attacks_blocked": 61,
+          "benign_blocked": 7
+        },
+        {
+          "threshold": 0.5,
+          "tpr": 0.7625,
+          "fpr": 0.07,
+          "attacks_blocked": 61,
+          "benign_blocked": 7
+        },
+        {
+          "threshold": 0.6,
+          "tpr": 0.7625,
+          "fpr": 0.07,
+          "attacks_blocked": 61,
+          "benign_blocked": 7
+        },
+        {
+          "threshold": 0.7,
+          "tpr": 0.7625,
+          "fpr": 0.07,
+          "attacks_blocked": 61,
+          "benign_blocked": 7
+        },
+        {
+          "threshold": 0.8,
+          "tpr": 0.7625,
+          "fpr": 0.07,
+          "attacks_blocked": 61,
+          "benign_blocked": 7
+        },
+        {
+          "threshold": 0.9,
+          "tpr": 0.7625,
+          "fpr": 0.07,
+          "attacks_blocked": 61,
+          "benign_blocked": 7
+        },
+        {
+          "threshold": 1.0,
+          "tpr": 0.7625,
+          "fpr": 0.07,
+          "attacks_blocked": 61,
+          "benign_blocked": 7
+        }
+      ],
+      "auc_partial": 0.352,
+      "min_detection": 0.7625,
+      "max_detection": 0.975,
+      "min_false_block": 0.07,
+      "max_false_block": 0.45
+    },
+    "fusion": {
+      "points": [
+        {
+          "threshold": 0.0,
+          "tpr": 0.9625,
+          "fpr": 0.44,
+          "attacks_blocked": 77,
+          "benign_blocked": 44
+        },
+        {
+          "threshold": 0.1,
+          "tpr": 0.9625,
+          "fpr": 0.39,
+          "attacks_blocked": 77,
+          "benign_blocked": 39
+        },
+        {
+          "threshold": 0.2,
+          "tpr": 0.925,
+          "fpr": 0.19,
+          "attacks_blocked": 74,
+          "benign_blocked": 19
+        },
+        {
+          "threshold": 0.3,
+          "tpr": 0.75,
+          "fpr": 0.08,
+          "attacks_blocked": 60,
+          "benign_blocked": 8
+        },
+        {
+          "threshold": 0.4,
+          "tpr": 0.6875,
+          "fpr": 0.06,
+          "attacks_blocked": 55,
+          "benign_blocked": 6
+        },
+        {
+          "threshold": 0.5,
+          "tpr": 0.625,
+          "fpr": 0.06,
+          "attacks_blocked": 50,
+          "benign_blocked": 6
+        },
+        {
+          "threshold": 0.6,
+          "tpr": 0.625,
+          "fpr": 0.05,
+          "attacks_blocked": 50,
+          "benign_blocked": 5
+        },
+        {
+          "threshold": 0.7,
+          "tpr": 0.6125,
+          "fpr": 0.05,
+          "attacks_blocked": 49,
+          "benign_blocked": 5
+        },
+        {
+          "threshold": 0.8,
+          "tpr": 0.6125,
+          "fpr": 0.05,
+          "attacks_blocked": 49,
+          "benign_blocked": 5
+        },
+        {
+          "threshold": 0.9,
+          "tpr": 0.525,
+          "fpr": 0.03,
+          "attacks_blocked": 42,
+          "benign_blocked": 3
+        },
+        {
+          "threshold": 1.0,
+          "tpr": 0.525,
+          "fpr": 0.03,
+          "attacks_blocked": 42,
+          "benign_blocked": 3
+        }
+      ],
+      "auc_partial": 0.36075,
+      "min_detection": 0.525,
+      "max_detection": 0.9625,
+      "min_false_block": 0.03,
+      "max_false_block": 0.44
+    }
+  }
+}

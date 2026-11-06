@@ -1,0 +1,12 @@
+{
+  "deepset": {
+    "attack_n": 263,
+    "benign_n": 399,
+    "det@0.5": 109,
+    "fp@0.5": 4
+  },
+  "notinject": {
+    "benign_n": 339,
+    "fp@0.5": 147
+  }
+}

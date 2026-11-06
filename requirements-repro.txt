@@ -1,0 +1,14 @@
+# Audit-only dependencies (audit_saved_records.py)
+#   none: the audit script uses the Python 3.10+ standard library only.
+#
+# Re-running the experiment scripts in scripts/ additionally requires the
+# detector package and the pinned versions below.
+pinj==0.7.2            # the ChainGuard detector package (src/pinj/chainguard)
+scikit-learn==1.7.0    # local intent classifier
+numpy==2.3.1
+scipy==1.16.0          # exact McNemar tests, Wilson intervals
+matplotlib==3.10.3     # make_roc_figure.py only
+# Comparator and target-model experiments only:
+transformers==4.53.0
+torch==2.7.1
+datasets==3.6.0

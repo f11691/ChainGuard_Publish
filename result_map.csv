@@ -1,0 +1,14 @@
+result,script,input_data,stored_output,granularity
+Primary holdout detection and false blocks (Sec. 6.1),end_to_end.py,authored holdout (not supplied),end_to_end_v0.7.2.json,auditable
+Classifier cross-validation and overlap (Sec. 4.7.1),classifier_report.py,training corpus (not supplied),classifier_report_v0.7.2.json,summary
+Matched learned-guard baseline (Sec. 6.3),learned_baseline.py,authored holdout (not supplied),learned_baseline_v0.7.2.json,auditable
+ROC comparison figure (Fig. 5),make_roc_figure.py,learned_baseline_v0.7.2.json,Fig/fig_roc_comparison.pdf,rerunnable
+"Component ablation, eleven arms (Sec. 6.5)",ablation_study.py,authored holdout (not supplied),ablation_v0.7.2.json,auditable
+Threshold sensitivity sweep (Sec. 6.6),threshold_sweep.py,authored holdout (not supplied),threshold_sweep_v0.7.2.json,auditable
+End-to-end target-model replay (Sec. 6.9),end_to_end.py,"three local models, 612 recorded turns",end_to_end_v0.7.2.json,auditable
+Gandalf end-to-end replication (Sec. 6.9),gandalf_end_to_end.py,Lakera/gandalf_ignore_instructions,gandalf_end_to_end_v0.7.2.json,summary
+deepset and NotInject benchmarks (Sec. 6.10),external_benchmark.py,"deepset/prompt-injections, leolee99/NotInject",external_benchmark_v0.7.2.json,auditable
+Gandalf and Safe-Guard benchmarks (Sec. 6.10),large_public_benchmarks.py,"Lakera/gandalf, xTRam1/safe-guard",large_public_benchmarks_v0.7.2.json,summary
+InjecAgent two-turn evaluation (Sec. 6.10),injecagent_eval.py,InjecAgent test cases,injecagent_v0.7.2.json,summary
+DeBERTa comparator on independent data (Sec. 6.10),"external_benchmark.py, large_public_benchmarks.py, injecagent_eval.py",same independent datasets,"external_benchmark_deberta_v0.7.2.json, large_public_deberta_v0.7.2.json, injecagent_deberta_v0.7.2.json",summary
+Query-bounded adaptive evaluation (Sec. 6.11),adaptive_redteam.py,61 initially blocked attack sessions,"adaptive_nofa_v0.7.2.json, adaptive_nofa_tiny_v0.7.2.json, adaptive_fa_tiny_v0.7.2.json",auditable

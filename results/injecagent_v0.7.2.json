@@ -1,0 +1,61 @@
+{
+  "direct_harm": {
+    "n": 510,
+    "detected": 58,
+    "detection": 0.11372549019607843,
+    "detection_ci": [
+      8.901151819612545,
+      14.421500871184726
+    ],
+    "user_turn_false_blocks": 0,
+    "false_block": 0.0,
+    "false_block_ci": [
+      4.336808689942018e-17,
+      0.747596122605608
+    ],
+    "detected_without_provenance": 6,
+    "provenance_contribution": 52,
+    "reason_codes": {
+      "ml_attack_signal": 3,
+      "untrusted_executable_instruction": 53,
+      "calibrated_ml_attack": 2
+    }
+  },
+  "data_stealing": {
+    "n": 544,
+    "detected": 373,
+    "detection": 0.6856617647058824,
+    "detection_ci": [
+      64.54627727367897,
+      72.32570398056357
+    ],
+    "user_turn_false_blocks": 0,
+    "false_block": 0.0,
+    "false_block_ci": [
+      0.0,
+      0.7011989984755296
+    ],
+    "detected_without_provenance": 77,
+    "provenance_contribution": 296,
+    "reason_codes": {
+      "untrusted_executable_instruction": 373
+    }
+  },
+  "pooled": {
+    "n": 1054,
+    "detected": 431,
+    "detection": 0.4089184060721063,
+    "detection_ci": [
+      37.96208488767466,
+      43.88774729665674
+    ],
+    "user_turn_false_blocks": 0,
+    "false_block": 0.0,
+    "false_block_ci": [
+      2.168404344971009e-17,
+      0.3631412619026181
+    ],
+    "detected_without_provenance": 83,
+    "provenance_contribution": 348
+  }
+}

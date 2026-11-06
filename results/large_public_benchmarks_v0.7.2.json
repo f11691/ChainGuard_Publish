@@ -1,0 +1,27 @@
+{
+  "Lakera/gandalf_ignore_instructions": {
+    "n_attack": 1000,
+    "detected": 704,
+    "detection": 0.704,
+    "ci": [
+      67.49696568688988,
+      73.14690256682648
+    ]
+  },
+  "xTRam1/safe-guard-prompt-injection": {
+    "n_attack": 3146,
+    "detected": 1302,
+    "detection": 0.41385886840432295,
+    "detection_ci": [
+      39.676350274282065,
+      43.11643447106141
+    ],
+    "n_benign": 7150,
+    "false_blocked": 137,
+    "false_block": 0.01916083916083916,
+    "false_block_ci": [
+      1.6231802332262548,
+      2.2606276540711114
+    ]
+  }
+}

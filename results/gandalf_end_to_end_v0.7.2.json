@@ -1,0 +1,15 @@
+{
+  "n": 250,
+  "chainguard_detected": 179,
+  "detection_ci": [
+    65.71618753005933,
+    76.83005393143527
+  ],
+  "compromise_none": 50,
+  "compromise_ingress": 11,
+  "compromise_ingress_egress": 0,
+  "compromise_none_ci": [
+    15.512400632075337,
+    25.395597338071052
+  ]
+}

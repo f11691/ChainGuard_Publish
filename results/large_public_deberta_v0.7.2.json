@@ -1,0 +1,12 @@
+{
+  "gandalf": {
+    "n": 1000,
+    "detected": 1000
+  },
+  "safeguard": {
+    "n_attack": 3146,
+    "detected": 2633,
+    "n_benign": 7150,
+    "false_blocked": 13
+  }
+}

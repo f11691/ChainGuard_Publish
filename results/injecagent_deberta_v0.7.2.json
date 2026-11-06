@@ -1,0 +1,12 @@
+{
+  "direct_harm": {
+    "n": 510,
+    "tool_flagged": 410,
+    "user_flagged": 0
+  },
+  "data_stealing": {
+    "n": 544,
+    "tool_flagged": 283,
+    "user_flagged": 0
+  }
+}
