@@ -11,4 +11,4 @@ matplotlib==3.10.3     # make_roc_figure.py only
 # Comparator and target-model experiments only:
 transformers==4.53.0
 torch==2.7.1
-datasets==3.6.0
+datasets==5.0.1
